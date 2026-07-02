@@ -26,6 +26,20 @@ namespace SupermarketManagementAditya.Models
         [Range(0, 99999, ErrorMessage = "Quantity cannot be negative")]
         public int Quantity { get; set; }
 
+        // Automatic stock availability status
+        public string StockStatus
+        {
+            get
+            {
+                if (Quantity == 0)
+                    return "Out of Stock";
+                else if (Quantity <= 5)
+                    return "Low Stock";
+                else
+                    return "In Stock";
+            }
+        }
+
         [Required(ErrorMessage = "Manufacturing date is required")]
         [DataType(DataType.Date)]
         public DateTime ManufacturingDate { get; set; }

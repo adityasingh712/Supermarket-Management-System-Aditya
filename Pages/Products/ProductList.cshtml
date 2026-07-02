@@ -40,7 +40,6 @@
     <div class="card shadow p-3">
 
         <table class="table table-bordered">
-
             <thead class="table-success">
                 <tr>
                     <th>Image</th>
@@ -58,22 +57,20 @@
             </thead>
 
             <tbody>
-
                 @foreach (var item in Model.Products)
                 {
                     string rowStyle = "";
 
-                    if (item.Quantity < 5)
+                    if (item.StockStatus == "Out of Stock")
                     {
                         rowStyle = "background-color: rgba(255, 0, 0, 0.4);";
                     }
-                    else if (item.Quantity < 10)
+                    else if (item.StockStatus == "Low Stock")
                     {
                         rowStyle = "background-color: rgba(255, 193, 7, 0.4);";
                     }
 
                     <tr style="@rowStyle">
-
                         <td>
                             @if (!string.IsNullOrEmpty(item.ImagePath))
                             {
@@ -92,17 +89,17 @@
                         <td>@item.Quantity</td>
 
                         <td>
-                            @if (item.Quantity < 5)
+                            @if (item.StockStatus == "Out of Stock")
                             {
-                                <span class="badge bg-danger">Low Stock</span>
+                                <span class="badge bg-danger">Out of Stock</span>
                             }
-                            else if (item.Quantity < 10)
+                            else if (item.StockStatus == "Low Stock")
                             {
-                                <span class="badge bg-warning text-dark">Reorder Soon</span>
+                                <span class="badge bg-warning text-dark">Low Stock</span>
                             }
                             else
                             {
-                                <span class="badge bg-success">Available</span>
+                                <span class="badge bg-success">In Stock</span>
                             }
                         </td>
 
@@ -138,12 +135,9 @@
                                 </button>
                             </form>
                         </td>
-
                     </tr>
                 }
-
             </tbody>
-
         </table>
 
     </div>

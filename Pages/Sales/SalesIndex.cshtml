@@ -1,5 +1,5 @@
 ﻿@page
-@model SupermarketManagementAditya.Pages.Sales.IndexModel
+@model SupermarketManagementAditya.Pages.Sales.SalesIndexModel
 @{
     ViewData["Title"] = "Sales";
 }
@@ -7,7 +7,6 @@
 <div class="container mt-5">
 
     <div class="row mb-4">
-
         <div class="col-md-6">
             <div class="card shadow p-4 text-center">
                 <h4>Total Revenue</h4>
@@ -21,11 +20,9 @@
                 <h2>@Model.TotalItemsSold</h2>
             </div>
         </div>
-
     </div>
 
     <div class="card p-4 shadow mb-4">
-
         <h2>Sales Management</h2>
 
         @if (!string.IsNullOrEmpty(Model.Message))
@@ -36,59 +33,42 @@
         }
 
         <form method="post">
-
             <div class="mb-3">
-
                 <label>Select Product</label>
-
                 <select asp-for="SelectedProductId" class="form-control">
-
                     @foreach (var item in Model.Products)
                     {
                         <option value="@item.Id">
                             @item.ProductName - Stock: @item.Quantity
                         </option>
                     }
-
                 </select>
-
             </div>
 
             <div class="mb-3">
-
                 <label>Quantity Sold</label>
-
-                <input asp-for="QuantitySold" class="form-control" />
-
+                <input asp-for="QuantitySold" class="form-control" type="number" min="1" />
             </div>
 
             <button class="btn btn-success" type="submit">
                 Save Sale
             </button>
-
         </form>
-
     </div>
 
-
     <div class="card shadow p-3">
-
         <h4>Sales History</h4>
 
         <table class="table table-bordered">
-
             <thead class="table-dark">
-
                 <tr>
                     <th>Product</th>
                     <th>Quantity Sold</th>
                     <th>Total Amount</th>
                 </tr>
-
             </thead>
 
             <tbody>
-
                 @foreach (var sale in Model.SalesHistory)
                 {
                     <tr>
@@ -97,11 +77,8 @@
                         <td>£@sale.TotalAmount</td>
                     </tr>
                 }
-
             </tbody>
-
         </table>
-
     </div>
 
 </div>

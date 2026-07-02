@@ -5,11 +5,11 @@ using SupermarketManagementAditya.Models;
 
 namespace SupermarketManagementAditya.Pages.Sales
 {
-    public class IndexModel : PageModel
+    public class SalesIndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
-        public IndexModel(ApplicationDbContext context)
+        public SalesIndexModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -45,6 +45,13 @@ namespace SupermarketManagementAditya.Pages.Sales
                 return Page();
             }
 
+            if (QuantitySold <= 0)
+            {
+                LoadData();
+                Message = "Quantity must be greater than 0";
+                return Page();
+            }
+
             if (QuantitySold > product.Quantity)
             {
                 LoadData();
@@ -54,11 +61,12 @@ namespace SupermarketManagementAditya.Pages.Sales
 
             product.Quantity = product.Quantity - QuantitySold;
 
-            Sale sale = new Sale();
-
-            sale.ProductName = product.ProductName;
-            sale.QuantitySold = QuantitySold;
-            sale.TotalAmount = product.Price * QuantitySold;
+            Sale sale = new Sale
+            {
+                ProductName = product.ProductName,
+                QuantitySold = QuantitySold,
+                TotalAmount = product.Price * QuantitySold
+            };
 
             _context.Sales.Add(sale);
             _context.SaveChanges();
@@ -73,11 +81,9 @@ namespace SupermarketManagementAditya.Pages.Sales
         public void LoadData()
         {
             Products = _context.Products.ToList();
-
             SalesHistory = _context.Sales.ToList();
 
             TotalRevenue = _context.Sales.Sum(x => x.TotalAmount);
-
             TotalItemsSold = _context.Sales.Sum(x => x.QuantitySold);
         }
     }

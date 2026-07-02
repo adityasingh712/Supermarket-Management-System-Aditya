@@ -1,0 +1,47 @@
+﻿@page
+@model SupermarketManagementAditya.Pages.Suppliers.EditSupplierModel
+@{
+    ViewData["Title"] = "Edit Supplier";
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+
+        <h2>Edit Supplier</h2>
+        <p class="text-muted">Rename supplier for all products linked to this supplier.</p>
+
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <div class="alert alert-danger">
+                @Model.Message
+            </div>
+        }
+
+        <form method="post">
+
+            <input type="hidden" asp-for="OldSupplierName" />
+
+            <div class="mb-3">
+                <label>Old Supplier Name</label>
+                <input asp-for="OldSupplierName" class="form-control" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label>New Supplier Name</label>
+                <input asp-for="NewSupplierName" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Update Supplier
+            </button>
+
+            <a href="/Suppliers/SupplierIndex" class="btn btn-secondary">
+                Back
+            </a>
+
+        </form>
+
+    </div>
+
+</div>

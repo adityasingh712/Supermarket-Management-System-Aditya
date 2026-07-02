@@ -1,0 +1,38 @@
+.hero-section {
+    min-height: 38vh;
+    background: linear-gradient(135deg, #198754, #14532d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 25px;
+}
+
+.feature-box {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+    .feature-box:hover {
+        transform: translateY(-5px);
+    }
+
+.auth-page {
+    min-height: 80vh;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    width: 430px;
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.15);
+}

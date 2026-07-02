@@ -1,0 +1,151 @@
+﻿@page
+@model SupermarketManagementAditya.Pages.Products.ProductListModel
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between mb-4">
+        <div>
+            <h2>Product List</h2>
+            <p class="text-muted">Manage supermarket products and stock</p>
+        </div>
+
+        <a href="/Products/AddProduct" class="btn btn-success">
+            Add Product
+        </a>
+    </div>
+
+    <div class="card shadow p-3 mb-4">
+        <form method="get">
+            <div class="row">
+                <div class="col-md-10">
+                    <input type="text"
+                           name="SearchText"
+                           value="@Model.SearchText"
+                           class="form-control"
+                           placeholder="Search by Product Name or Barcode" />
+                </div>
+
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="card shadow p-3">
+
+        <table class="table table-bordered">
+
+            <thead class="table-success">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Supplier</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Stock Status</th>
+                    <th>MFG</th>
+                    <th>EXP</th>
+                    <th>Expiry Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model.Products)
+                {
+                    string rowStyle = "";
+
+                    if (item.Quantity < 5)
+                    {
+                        rowStyle = "background-color: rgba(255, 0, 0, 0.4);";
+                    }
+                    else if (item.Quantity < 10)
+                    {
+                        rowStyle = "background-color: rgba(255, 193, 7, 0.4);";
+                    }
+
+                    <tr style="@rowStyle">
+
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.ImagePath))
+                            {
+                                <img src="@item.ImagePath" width="60" height="60" />
+                            }
+                            else
+                            {
+                                <span>No Image</span>
+                            }
+                        </td>
+
+                        <td>@item.ProductName</td>
+                        <td>@item.Category</td>
+                        <td>@item.Supplier</td>
+                        <td>£@item.Price</td>
+                        <td>@item.Quantity</td>
+
+                        <td>
+                            @if (item.Quantity < 5)
+                            {
+                                <span class="badge bg-danger">Low Stock</span>
+                            }
+                            else if (item.Quantity < 10)
+                            {
+                                <span class="badge bg-warning text-dark">Reorder Soon</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">Available</span>
+                            }
+                        </td>
+
+                        <td>@item.ManufacturingDate.ToShortDateString()</td>
+                        <td>@item.ExpiryDate.ToShortDateString()</td>
+
+                        <td>
+                            @if (item.ExpiryDate < DateTime.Today)
+                            {
+                                <span class="badge bg-danger">Expired</span>
+                            }
+                            else if (item.ExpiryDate <= DateTime.Today.AddDays(7))
+                            {
+                                <span class="badge bg-warning text-dark">Expiring Soon</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">Valid</span>
+                            }
+                        </td>
+
+                        <td>
+                            <a href="/Products/EditProduct?id=@item.Id"
+                               class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+
+                            <form method="post" style="display:inline;">
+                                <input type="hidden" name="DeleteId" value="@item.Id" />
+
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

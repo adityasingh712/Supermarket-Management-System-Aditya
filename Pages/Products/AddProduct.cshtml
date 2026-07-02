@@ -1,0 +1,76 @@
+﻿@page
+@model SupermarketManagementAditya.Pages.Products.AddProductModel
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2>Add Product</h2>
+        <p class="text-muted">Enter product details for the supermarket inventory.</p>
+
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <div class="alert alert-danger">
+                @Model.Message
+            </div>
+        }
+
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                <label>Product Name</label>
+                <input asp-for="Product.ProductName" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Category</label>
+                <input asp-for="Product.Category" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Supplier</label>
+                <input asp-for="Product.Supplier" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Barcode</label>
+                <input asp-for="Product.Barcode" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Price</label>
+                <input asp-for="Product.Price" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Quantity</label>
+                <input asp-for="Product.Quantity" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Manufacturing Date</label>
+                <input asp-for="Product.ManufacturingDate" type="date" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Expiry Date</label>
+                <input asp-for="Product.ExpiryDate" type="date" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Product Image</label>
+                <input asp-for="ImageFile" type="file" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Save Product
+            </button>
+
+            <a href="/Products/ProductList" class="btn btn-secondary">
+                View Products
+            </a>
+
+        </form>
+    </div>
+</div>

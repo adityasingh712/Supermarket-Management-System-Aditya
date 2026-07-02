@@ -1,0 +1,97 @@
+﻿@page
+@model SupermarketManagementAditya.Pages.DashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-5">
+
+    <h2>Supermarket Dashboard</h2>
+    <p class="text-muted">Welcome to your management system</p>
+
+    <div class="row mt-4">
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 text-center">
+                <h4>Total Products</h4>
+                <h2>@Model.TotalProducts</h2>
+                <p>Products currently available</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 text-center">
+                <h4>Total Revenue</h4>
+                <h2>£@Model.TotalRevenue</h2>
+                <p>Total sales earnings</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 text-center">
+                <h4>Expiring Soon</h4>
+                <h2>@Model.ExpiringSoon</h2>
+                <p>Products expiring in 30 days</p>
+
+                <a href="/Products/ExpiringSoon" class="btn btn-warning">
+                    View Products
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 text-center">
+                <h4>Suppliers</h4>
+                <h2>@Model.TotalSuppliers</h2>
+                <p>Active suppliers</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row mt-4">
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 text-center">
+                <h4>Add Product</h4>
+                <p>Add new supermarket products</p>
+                <a href="/Products/AddProduct" class="btn btn-success">
+                    Add Product
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 text-center">
+                <h4>View Products</h4>
+                <p>See, search, edit and delete products</p>
+                <a href="/Products/ProductList" class="btn btn-primary">
+                    View Products
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 text-center">
+                <h4>Sales</h4>
+                <p>Record supermarket sales</p>
+                <a href="/Sales" class="btn btn-warning">
+                    Sales
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 text-center">
+                <h4>Suppliers</h4>
+                <p>View supplier products and images</p>
+                <a href="/Suppliers/SupplierIndex" class="btn btn-info">
+                    View Suppliers
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

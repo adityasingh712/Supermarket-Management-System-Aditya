@@ -28,13 +28,24 @@ namespace SupermarketManagementAditya.Pages.Sales
         public decimal TotalRevenue { get; set; }
         public int TotalItemsSold { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("UserEmail")))
+            {
+                return RedirectToPage("/Accounts/Login");
+            }
+
             LoadData();
+            return Page();
         }
 
         public IActionResult OnPost()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("UserEmail")))
+            {
+                return RedirectToPage("/Accounts/Login");
+            }
+
             var product = _context.Products
                 .FirstOrDefault(x => x.Id == SelectedProductId);
 
@@ -83,8 +94,8 @@ namespace SupermarketManagementAditya.Pages.Sales
             Products = _context.Products.ToList();
             SalesHistory = _context.Sales.ToList();
 
-            TotalRevenue = _context.Sales.Sum(x => x.TotalAmount);
-            TotalItemsSold = _context.Sales.Sum(x => x.QuantitySold);
+            TotalRevenue = SalesHistory.Sum(x => x.TotalAmount);
+            TotalItemsSold = SalesHistory.Sum(x => x.QuantitySold);
         }
     }
 }

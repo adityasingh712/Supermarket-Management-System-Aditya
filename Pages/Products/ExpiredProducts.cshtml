@@ -1,19 +1,19 @@
 ﻿@page
-@model SupermarketManagementAditya.Pages.Products.ExpiringSoonModel
+@model SupermarketManagementAditya.Pages.Products.ExpiredProductsModel
 @{
-    ViewData["Title"] = "Expiring Soon";
+    ViewData["Title"] = "Expired Products";
 }
 
 <div class="container mt-5">
 
-    <h2>Expiring Soon Products</h2>
-    <p class="text-muted">Products expiring within the next 30 days</p>
+    <h2>Expired Products</h2>
+    <p class="text-muted">Products that are already expired</p>
 
     <div class="card shadow p-3">
 
         <table class="table table-bordered table-hover">
 
-            <thead class="table-warning">
+            <thead class="table-danger">
                 <tr>
                     <th>Image</th>
                     <th>Product Name</th>
@@ -45,7 +45,7 @@
                         <td>@item.ExpiryDate.ToShortDateString()</td>
 
                         <td>
-                            <span class="badge bg-warning text-dark">Expiring Soon</span>
+                            <span class="badge bg-danger">Expired</span>
                         </td>
                     </tr>
                 }

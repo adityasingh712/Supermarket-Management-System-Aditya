@@ -5,11 +5,11 @@ using SupermarketManagementAditya.Models;
 
 namespace SupermarketManagementAditya.Pages.Products
 {
-    public class ExpiringSoonModel : PageModel
+    public class ExpiredProductsModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
-        public ExpiringSoonModel(ApplicationDbContext context)
+        public ExpiredProductsModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -24,10 +24,9 @@ namespace SupermarketManagementAditya.Pages.Products
             }
 
             DateTime today = DateTime.Today;
-            DateTime nextMonth = today.AddDays(30);
 
             Products = _context.Products
-                .Where(x => x.ExpiryDate >= today && x.ExpiryDate <= nextMonth)
+                .Where(x => x.ExpiryDate < today)
                 .OrderBy(x => x.ExpiryDate)
                 .ToList();
 

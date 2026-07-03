@@ -16,6 +16,7 @@ namespace SupermarketManagementAditya.Pages
         public int TotalProducts { get; set; }
         public decimal TotalRevenue { get; set; }
         public int ExpiringSoon { get; set; }
+        public int ExpiredProducts { get; set; }
         public int TotalSuppliers { get; set; }
 
         public IActionResult OnGet()
@@ -25,11 +26,17 @@ namespace SupermarketManagementAditya.Pages
                 return RedirectToPage("/Accounts/Login");
             }
 
-            TotalProducts = _context.Products.Count();
-            TotalRevenue = _context.Sales.Sum(x => x.TotalAmount);
-
             DateTime today = DateTime.Today;
             DateTime nextMonth = today.AddDays(30);
+
+            TotalProducts = _context.Products.Count();
+
+            TotalRevenue = _context.Sales.Any()
+                ? _context.Sales.Sum(x => x.TotalAmount)
+                : 0;
+
+            ExpiredProducts = _context.Products
+                .Count(x => x.ExpiryDate < today);
 
             ExpiringSoon = _context.Products
                 .Count(x => x.ExpiryDate >= today && x.ExpiryDate <= nextMonth);

@@ -4,91 +4,188 @@
     ViewData["Title"] = "Dashboard";
 }
 
+<style>
+    .dashboard-header {
+        background-color: #343a40;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+
+    .dashboard-card {
+        border-radius: 10px;
+        transition: 0.2s;
+        min-height: 220px;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+        }
+
+        .dashboard-card h2 {
+            font-size: 34px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .dashboard-card p {
+            color: #6c757d;
+            min-height: 55px;
+        }
+
+    .section-title {
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>
+
 <div class="container mt-5">
 
-    <h2>Supermarket Dashboard</h2>
-    <p class="text-muted">Welcome to your management system</p>
+    <div class="dashboard-header">
+        <h2>Supermarket Management Dashboard</h2>
+        <p class="mb-0">
+            Welcome to the Supermarket Management System.
+        </p>
+    </div>
 
-    <div class="row mt-4">
+    <h4 class="section-title">System Overview</h4>
 
-        <div class="col-md-3">
-            <div class="card shadow p-4 text-center">
-                <h4>Total Products</h4>
-                <h2>@Model.TotalProducts</h2>
-                <p>Products currently available</p>
-            </div>
-        </div>
+    <div class="row">
 
-        <div class="col-md-3">
-            <div class="card shadow p-4 text-center">
-                <h4>Total Revenue</h4>
-                <h2>£@Model.TotalRevenue</h2>
-                <p>Total sales earnings</p>
-            </div>
-        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card shadow text-center p-4">
+                <h5>Total Products</h5>
 
-        <div class="col-md-3">
-            <div class="card shadow p-4 text-center">
-                <h4>Expiring Soon</h4>
-                <h2>@Model.ExpiringSoon</h2>
-                <p>Products expiring in 30 days</p>
+                <h2 class="text-primary">
+                    @Model.TotalProducts
+                </h2>
 
-                <a href="/Products/ExpiringSoon" class="btn btn-warning">
+                <p>Total number of products currently available.</p>
+
+                <a href="/Products/ProductList"
+                   class="btn btn-primary">
                     View Products
                 </a>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow p-4 text-center">
-                <h4>Suppliers</h4>
-                <h2>@Model.TotalSuppliers</h2>
-                <p>Active suppliers</p>
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card shadow text-center p-4">
+                <h5>Total Revenue</h5>
+
+                <h2 class="text-success">
+                    £@Model.TotalRevenue
+                </h2>
+
+                <p>Total revenue generated from sales.</p>
+
+                <a href="/Sales"
+                   class="btn btn-success">
+                    View Sales
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card shadow text-center p-4">
+                <h5>Expired Products</h5>
+
+                <h2 class="text-danger">
+                    @Model.ExpiredProducts
+                </h2>
+
+                <p>Products that have already expired.</p>
+
+                <a href="/Products/ExpiredProducts"
+                   class="btn btn-danger">
+                    View Expired
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card shadow text-center p-4">
+                <h5>Expiring Soon</h5>
+
+                <h2 class="text-warning">
+                    @Model.ExpiringSoon
+                </h2>
+
+                <p>Products expiring within the next 30 days.</p>
+
+                <a href="/Products/ExpiringSoon"
+                   class="btn btn-warning">
+                    View Expiring
+                </a>
             </div>
         </div>
 
     </div>
 
+    <h4 class="section-title">Quick Actions</h4>
 
-    <div class="row mt-4">
+    <div class="row">
 
-        <div class="col-md-3">
-            <div class="card shadow p-4 text-center">
-                <h4>Add Product</h4>
-                <p>Add new supermarket products</p>
-                <a href="/Products/AddProduct" class="btn btn-success">
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card shadow text-center p-4">
+
+                <h5>Add Product</h5>
+
+                <p>Add new supermarket products to the system.</p>
+
+                <a href="/Products/AddProduct"
+                   class="btn btn-success">
                     Add Product
                 </a>
+
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow p-4 text-center">
-                <h4>View Products</h4>
-                <p>See, search, edit and delete products</p>
-                <a href="/Products/ProductList" class="btn btn-primary">
-                    View Products
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card shadow text-center p-4">
+
+                <h5>Product List</h5>
+
+                <p>View, search, edit and delete products.</p>
+
+                <a href="/Products/ProductList"
+                   class="btn btn-primary">
+                    Product List
                 </a>
+
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow p-4 text-center">
-                <h4>Sales</h4>
-                <p>Record supermarket sales</p>
-                <a href="/Sales" class="btn btn-warning">
-                    Sales
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card shadow text-center p-4">
+
+                <h5>Sales</h5>
+
+                <p>Record product sales and update stock.</p>
+
+                <a href="/Sales"
+                   class="btn btn-warning">
+                    Open Sales
                 </a>
+
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow p-4 text-center">
-                <h4>Suppliers</h4>
-                <p>View supplier products and images</p>
-                <a href="/Suppliers/SupplierIndex" class="btn btn-info">
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card shadow text-center p-4">
+
+                <h5>Suppliers</h5>
+
+                <p>Manage supplier information and products.</p>
+
+                <a href="/Suppliers/SupplierIndex"
+                   class="btn btn-info">
                     View Suppliers
                 </a>
+
             </div>
         </div>
 

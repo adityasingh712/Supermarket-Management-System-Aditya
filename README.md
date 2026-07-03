@@ -204,7 +204,8 @@ After login, users can access the dashboard and test all supermarket features.
 
 ## Author  
 
-**Aditya Singh**  
+**Aditya Singh** 
+**M01021091**
 
 CST2550 Coursework  
 
